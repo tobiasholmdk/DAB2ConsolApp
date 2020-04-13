@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using DabAflevering2.DBContext;
 using DabAflevering2.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -37,13 +39,15 @@ namespace DabAflevering2
                         foreach (TeacherEntity x in teachers)
                             Console.WriteLine("AU ID: " + x.AuId + " Teacher Name: " + x.Name + x.Exercises);
                         break;
-                    case "S:":
+                    case "S":
                         var students = db.Set<StudentEntity>().ToList();
                         foreach (var x in students) 
-                            Console.WriteLine("AU ID: " + x.AuId + " Student Name: " + x.Name + x.Exercises);
+                            Console.WriteLine("AU ID: " + x.AuId + " Student Name: " + x.Name + x.Exercises + x.Courses);
                         break;
                     case "D":
                         var assignments = db.Set<AssignmentEntity>().ToList();
+                        //foreach (var x in assignments)
+                            
                         foreach (var x in assignments) 
                             Console.WriteLine("Assigment ID " + x.AssignmentId);
                         break;
@@ -54,32 +58,28 @@ namespace DabAflevering2
                         break;
                     case "G":
                         var courses = db.Set<CourseEntity>().ToList();
-                        foreach (var x in courses) 
-                            Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.Name + "Course Assignments " + x.Assignments + " Course Teacher " + x.Teachers );
-                        break;/*
-                    case "Q":
-                          var ret = db.Courses
-                            .Join(db.AssignmentStudents,
-                                c => c.CourseId,
-                                a => a.Id,
-                                (c, a) => new
-                                {
-                                    ID = a.Id
-                                    A = 
+                        foreach (var x in courses)
+                        {
+                            Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.Name + " Teacher " + x.Teachers );
+                        }
 
-                                }
-                            ).Where(t => ((t.FromMin + t.FromHour * 60) <= (FromMin + FromHour * 60)) && ((t.UntilMin + t.UntilHour * 60) >= (UntilMin + UntilHour * 60)) && (t.Day == Day) && (t.Month == Month) && (t.Year == Year)).ToListAsync();
-                }
-                        var help = db.Set<CourseEntity>().ToList();
-                        foreach (var x in courses) 
-                            Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.Name + "Course Assignments " + x.Assignments + " Course Teacher " + x.Teachers );
-                        break;*/
-                    default:
-                        
                         break;
+                    case "W":
+                        var joins = db.Set<StudentCourseEntity>().ToList();
+                        foreach (var x in joins)
+                        {
+                            Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.StudentAuId + " Teacher " + x.Courses );
+                        }
+                        break;
+
                 }
-            }
-            
+            } 
+        }
+        
+        public static async Task<StudentEntity> GetById(int id)
+        {
+            var db = new DabDBContext();
+            return await db.Set<StudentEntity>().FindAsync(id);
         }
     }
 }
