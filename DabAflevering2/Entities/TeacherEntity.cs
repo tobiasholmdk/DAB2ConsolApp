@@ -8,7 +8,6 @@ namespace Dab_aflevering_2.Entities
     {
         [Key]
         public int AuId { get; set; }
-        
         [Required]
         public string Name { get; set; }
 

@@ -7,8 +7,7 @@ namespace Dab_aflevering_2.Entities
     public class StudentEntity
     {
         [Key]
-        public int AuId { get; set; } 
-        
+        public int AuId { get; set; }
         [Required]
         public string Name { get; set; }
 

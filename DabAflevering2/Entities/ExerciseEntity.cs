@@ -10,7 +10,6 @@ namespace Dab_aflevering_2.Entities
         public int Number { get; set; }
         [Required]
         public string Lecture { get; set; }
-        
         public string? HelpWhere { get; set; }
         
         // Nav props

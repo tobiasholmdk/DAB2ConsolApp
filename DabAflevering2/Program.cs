@@ -12,11 +12,9 @@ namespace DabAflevering2
     {
         static void Main(string[] args)
         {
-
-            
-          //  InsertDummyData();
+            InsertDummyData();
         }
-        /*
+        
         static void InsertDummyData()
         {
             using var db = new DabDBContext();
@@ -38,7 +36,7 @@ namespace DabAflevering2
             db.Add(student);
                     
             db.SaveChanges();
-        }*/
+        }
         
     }
 }

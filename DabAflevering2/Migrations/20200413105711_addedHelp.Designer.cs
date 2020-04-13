@@ -4,14 +4,16 @@ using Dab_aflevering_2.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DabAflevering2.Migrations
 {
     [DbContext(typeof(DabDBContext))]
-    partial class DabDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200413105711_addedHelp")]
+    partial class addedHelp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

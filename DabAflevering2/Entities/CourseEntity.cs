@@ -4,9 +4,10 @@ using Dab_aflevering_2.Contracts;
 
 namespace Dab_aflevering_2.Entities
 {
-    public class CourseEntity 
+    public class CourseEntity
     {
-        [Key]
+        public int Id { get; set; }
+        [Required]
         public int CourseId { get; set; }
         [Required]
         public string Name { get; set; }

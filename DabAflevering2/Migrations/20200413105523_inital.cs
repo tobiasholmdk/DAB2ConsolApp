@@ -2,7 +2,7 @@
 
 namespace DabAflevering2.Migrations
 {
-    public partial class initial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,14 +10,13 @@ namespace DabAflevering2.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    AuId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AuId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.PrimaryKey("PK_Students", x => x.AuId);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,17 +26,17 @@ namespace DabAflevering2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    StudentEntityId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    StudentEntityAuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Students_StudentEntityId",
-                        column: x => x.StudentEntityId,
+                        name: "FK_Courses_Students_StudentEntityAuId",
+                        column: x => x.StudentEntityAuId,
                         principalTable: "Students",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -48,7 +47,7 @@ namespace DabAflevering2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentAuId = table.Column<int>(nullable: false),
-                    StudentsId = table.Column<int>(nullable: true),
+                    StudentsAuId = table.Column<int>(nullable: true),
                     CourseId = table.Column<int>(nullable: false),
                     CoursesId = table.Column<int>(nullable: true),
                     Semester = table.Column<int>(nullable: false)
@@ -63,10 +62,10 @@ namespace DabAflevering2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_StudentsCourses_Students_StudentsId",
-                        column: x => x.StudentsId,
+                        name: "FK_StudentsCourses_Students_StudentsAuId",
+                        column: x => x.StudentsAuId,
                         principalTable: "Students",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -74,15 +73,14 @@ namespace DabAflevering2.Migrations
                 name: "Teachers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    AuId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AuId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     CourseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.AuId);
                     table.ForeignKey(
                         name: "FK_Teachers_Courses_CourseId",
                         column: x => x.CourseId,
@@ -97,7 +95,7 @@ namespace DabAflevering2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TeacherId = table.Column<int>(nullable: true),
+                    TeacherAuId = table.Column<int>(nullable: true),
                     CourseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -110,10 +108,10 @@ namespace DabAflevering2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Assignments_Teachers_TeacherId",
-                        column: x => x.TeacherId,
+                        name: "FK_Assignments_Teachers_TeacherAuId",
+                        column: x => x.TeacherAuId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -123,26 +121,26 @@ namespace DabAflevering2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<string>(nullable: true),
-                    Lecture = table.Column<string>(nullable: true),
+                    Number = table.Column<int>(nullable: false),
+                    Lecture = table.Column<string>(nullable: false),
                     HelpWhere = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<int>(nullable: true),
-                    StudentId = table.Column<int>(nullable: true)
+                    TeacherAuId = table.Column<int>(nullable: true),
+                    StudentAuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exercises", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Exercises_Students_StudentId",
-                        column: x => x.StudentId,
+                        name: "FK_Exercises_Students_StudentAuId",
+                        column: x => x.StudentAuId,
                         principalTable: "Students",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Exercises_Teachers_TeacherId",
-                        column: x => x.TeacherId,
+                        name: "FK_Exercises_Teachers_TeacherAuId",
+                        column: x => x.TeacherAuId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -155,7 +153,7 @@ namespace DabAflevering2.Migrations
                     AssignmentId = table.Column<int>(nullable: false),
                     AssignmentsId = table.Column<int>(nullable: true),
                     StudentAuId = table.Column<int>(nullable: false),
-                    StudentsId = table.Column<int>(nullable: true)
+                    StudentsAuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -167,10 +165,10 @@ namespace DabAflevering2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssignmentStudents_Students_StudentsId",
-                        column: x => x.StudentsId,
+                        name: "FK_AssignmentStudents_Students_StudentsAuId",
+                        column: x => x.StudentsAuId,
                         principalTable: "Students",
-                        principalColumn: "Id",
+                        principalColumn: "AuId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -180,9 +178,9 @@ namespace DabAflevering2.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assignments_TeacherId",
+                name: "IX_Assignments_TeacherAuId",
                 table: "Assignments",
-                column: "TeacherId");
+                column: "TeacherAuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AssignmentStudents_AssignmentsId",
@@ -190,24 +188,24 @@ namespace DabAflevering2.Migrations
                 column: "AssignmentsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssignmentStudents_StudentsId",
+                name: "IX_AssignmentStudents_StudentsAuId",
                 table: "AssignmentStudents",
-                column: "StudentsId");
+                column: "StudentsAuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_StudentEntityId",
+                name: "IX_Courses_StudentEntityAuId",
                 table: "Courses",
-                column: "StudentEntityId");
+                column: "StudentEntityAuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercises_StudentId",
+                name: "IX_Exercises_StudentAuId",
                 table: "Exercises",
-                column: "StudentId");
+                column: "StudentAuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercises_TeacherId",
+                name: "IX_Exercises_TeacherAuId",
                 table: "Exercises",
-                column: "TeacherId");
+                column: "TeacherAuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentsCourses_CoursesId",
@@ -215,9 +213,9 @@ namespace DabAflevering2.Migrations
                 column: "CoursesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentsCourses_StudentsId",
+                name: "IX_StudentsCourses_StudentsAuId",
                 table: "StudentsCourses",
-                column: "StudentsId");
+                column: "StudentsAuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_CourseId",
