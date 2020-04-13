@@ -8,28 +8,25 @@ using DabAflevering2.DBContext;
 
 namespace DabAflevering2
 {
-    class CreateData
+    public class CreateData
     {
 
-        public void CreateNewStudent()
+        public void CreateNewStudent(DabDBContext db)
         {
-            using var db = new DabDBContext();
             StudentEntity student = new StudentEntity();
             Console.WriteLine("Write student name:");
             student.Name = Console.ReadLine();
             db.Add(student);
         }
-        public void CreateNewTeacher()
+        public void CreateNewTeacher(DabDBContext db)
         {
-            using var db = new DabDBContext();
             TeacherEntity teacher = new TeacherEntity();
             Console.WriteLine("write teacher name:");
             teacher.Name = Console.ReadLine();
             db.Add(teacher);
         }
-        public void CreateNewExecersise()
+        public void CreateNewExecersise(DabDBContext db)
         {
-            using var db = new DabDBContext();
             ExerciseEntity exercise = new ExerciseEntity();
             Console.WriteLine("Write nr of the exercise:");
             exercise.Number = Convert.ToInt32(Console.ReadLine());
@@ -37,23 +34,20 @@ namespace DabAflevering2
             exercise.Lecture = Console.ReadLine();
             db.Add(exercise);
         }
-        public void CreateNewAssignment()
+        public void CreateNewAssignment(DabDBContext db)
         {
-            using var db = new DabDBContext();
             AssignmentEntity assignment = new AssignmentEntity();
             db.Add(assignment);
         }
-        public void CreateNewCourseData()
+        public void CreateNewCourse(DabDBContext db)
         {
-            using var db = new DabDBContext();
             CourseEntity course = new CourseEntity();
             Console.WriteLine("Write name of course:");
             course.Name = Console.ReadLine();
             db.Add(course);
         }
-        public void CreateNewHelpRequestExercise()
+        public void CreateNewHelpRequestExercise(DabDBContext db)
         {
-            using var db = new DabDBContext();
             var student = db.Set<StudentEntity>().ToList();
             int i = 0;
             foreach (var x in student)
@@ -83,9 +77,8 @@ namespace DabAflevering2
             Console.WriteLine("Write where you want help:");
             exercise[exeid].HelpWhere = Console.ReadLine();
         }
-        public void CreateNewHelpRequestAssignment()
+        public void CreateNewHelpRequestAssignment(DabDBContext db)
         {
-            using var db = new DabDBContext();
             var student = db.Set<StudentEntity>().ToList();
             int i = 0;
             foreach (var x in student)
@@ -113,6 +106,46 @@ namespace DabAflevering2
             int assId = Convert.ToInt32(Console.ReadLine());
 
             shadow[assId].NeedHelp = true;
+        }
+        public void CreateDataHandler(DabDBContext db)
+        {
+            bool leave = false;
+            while(!leave)
+            {
+                Console.WriteLine("Press a key to create different objects");
+                Console.WriteLine("A for student, B for teacher");
+                Console.WriteLine("C for Exercse, D for Assignment, E for Course");
+                Console.WriteLine("F for help with exercise, G for help with assigment");
+                Console.WriteLine("Any other key to go back");
+                var input = Console.ReadLine();
+                switch (input)
+                {
+                    case "A":
+                        CreateNewStudent(db);
+                        break;
+                    case "B":
+                        CreateNewTeacher(db);
+                        break;
+                    case "C":
+                        CreateNewExecersise(db);
+                        break;
+                    case "D":
+                        CreateNewAssignment(db);
+                        break;
+                    case "E":
+                        CreateNewCourse(db);
+                        break;
+                    case "F":
+                        CreateNewHelpRequestExercise(db);
+                        break;
+                    case "G":
+                        CreateNewHelpRequestAssignment(db);
+                        break;
+                    default:
+                        leave = true;
+                        break;
+                }
+            }
         }
     }
 }

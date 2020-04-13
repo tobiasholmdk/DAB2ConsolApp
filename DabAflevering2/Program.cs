@@ -14,6 +14,7 @@ namespace DabAflevering2
     {
         static void Main(string[] args)
         {
+            var c = new CreateData();
             var db = new DabDBContext();
             var a = new DummyData(); 
             a.InsertDummyData();
@@ -29,7 +30,8 @@ namespace DabAflevering2
                 Console.WriteLine("Press G, and enter for a list of all Courses");
                 Console.WriteLine("Press Q, and get list over Assignments which need help");
                 Console.WriteLine("Press W, and get list over help requests for course 2");
-                
+                Console.WriteLine("Press C, to create new data");
+
                 var input = Console.ReadLine();
                 
                 switch (input)
@@ -70,6 +72,9 @@ namespace DabAflevering2
                         {
                             Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.StudentAuId + " Teacher " + x.Courses );
                         }
+                        break;
+                    case "C":
+                        c.CreateDataHandler(db);
                         break;
 
                 }

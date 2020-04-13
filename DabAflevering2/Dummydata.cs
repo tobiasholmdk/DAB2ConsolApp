@@ -29,7 +29,7 @@ namespace DabAflevering2
             StudentEntity student0 = new StudentEntity();
             student0.Name = "Gustav";
             db.Add(student0);
-
+            /*
             ExerciseEntity exercise1 = new ExerciseEntity();
             exercise1.Number = 2;
             exercise1.Lecture = "3 EF core";
@@ -52,7 +52,7 @@ namespace DabAflevering2
       
 
             
-            
+            /*
             CourseEntity course = new CourseEntity()
             {
                 Name = "Databaser",
@@ -72,14 +72,14 @@ namespace DabAflevering2
                 }
             };
             
-            db.Add(course);
-
+            db.Add(course);*/
+            /*
             StudentCourseEntity joinedStudCourse = new StudentCourseEntity()
             {
                 Students = student0,
                 StudentAuId = student0.AuId,
                 Courses = course,
-                CourseId = course.CourseId,
+                CourseId = course.CourseId
             };
             db.Add(joinedStudCourse);
             joinedStudCourse = new StudentCourseEntity()
@@ -87,7 +87,7 @@ namespace DabAflevering2
                 Students = student1,
                 StudentAuId = student1.AuId,
                 Courses = course,
-                CourseId = course.CourseId,
+                CourseId = course.CourseId
             };
             db.Add(joinedStudCourse);
             joinedStudCourse = new StudentCourseEntity()
@@ -95,13 +95,13 @@ namespace DabAflevering2
                 Students = student2,
                 StudentAuId = student2.AuId,
                 Courses = course,
-                CourseId = course.CourseId,
+                CourseId = course.CourseId
             };
 
             
             
             db.Add(joinedStudCourse);
-            
+            */
             db.SaveChanges();
         }
 
