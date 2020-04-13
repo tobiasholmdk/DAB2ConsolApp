@@ -30,6 +30,9 @@ namespace DabAflevering2
                 
                 switch (input)
                 {
+                    case "V":
+                        c.View(db);
+                        break;
                     case "C":
                         c.CreateDataHandler(db);
                         db.SaveChanges();
@@ -41,7 +44,7 @@ namespace DabAflevering2
                     Console.WriteLine("Press D, and enter for a list of all Assignments");
                     Console.WriteLine("Press F, and enter for a list of all Exercises");
                     Console.WriteLine("Press G, and enter for a list of all Courses");
-                    Console.WriteLine("Press Q, and get list over Assignments which need help");
+                    Console.WriteLine("Press Q, and get list over Assignments which need help for a teacher and his course");
                     Console.WriteLine("Press W, and get list over help requests for course 2");
                 
                     var input2 = Console.ReadLine();
@@ -76,7 +79,7 @@ namespace DabAflevering2
 
                             break;
                         
-                        case "T":
+                        case "Q":
                             
                             var teachersList = db.Set<TeacherEntity>().ToList();
                             var courseIDs = db.Set<CourseEntity>().ToList();
