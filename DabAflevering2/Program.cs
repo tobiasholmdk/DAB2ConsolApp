@@ -88,8 +88,9 @@ namespace DabAflevering2
                             {
                                 Console.WriteLine("Teacher Name:" + x.Name);
                             }
-                            Console.WriteLine("Choose a Course ID");
                             var inputTeacher = Console.ReadLine();
+                            Console.WriteLine("Choose a Course ID");
+                            
                             foreach (var x in courseIDs)
                             {
                                 Console.WriteLine("Course Name: " + x.Name + "  Course ID " + x.CourseId);
