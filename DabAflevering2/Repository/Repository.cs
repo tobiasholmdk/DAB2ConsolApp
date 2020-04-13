@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dab_aflevering_2.Contracts;
+using DabAflevering2.Contracts;
 
-namespace Dab_aflevering_2.Repositories
+namespace DabAflevering2.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {

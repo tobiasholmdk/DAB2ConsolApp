@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dab_aflevering_2.Contracts
+namespace DabAflevering2.Contracts
 {
     public interface IRepository<T> where T : class, IEntity
     {

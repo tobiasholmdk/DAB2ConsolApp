@@ -1,5 +1,5 @@
-using Dab_aflevering_2.DBContext;
-using Dab_aflevering_2.Entities;
+using DabAflevering2.DBContext;
+using DabAflevering2.Entities;
 
 namespace DabAflevering2
 {
