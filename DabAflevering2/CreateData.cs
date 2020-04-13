@@ -112,9 +112,7 @@ namespace DabAflevering2
             Console.WriteLine("Type Nr of the exercise you want help with:");
             int assId = Convert.ToInt32(Console.ReadLine());
 
-            shadow[assId].Student.Name = student[id].Name;
-            Console.WriteLine("Write where you want help:");
-            exercise[exeid].HelpWhere = Console.ReadLine();
+            shadow[assId].NeedHelp = true;
         }
     }
 }
