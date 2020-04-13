@@ -45,7 +45,7 @@ namespace DabAflevering2
                     case "D":
                         var assignments = db.Set<AssignmentEntity>().ToList();
                         foreach (var x in assignments) 
-                            Console.WriteLine("Assigment ID " + x.Id);
+                            Console.WriteLine("Assigment ID " + x.AssignmentId);
                         break;
                     case "F":
                         var exercises = db.Set<ExerciseEntity>().ToList();

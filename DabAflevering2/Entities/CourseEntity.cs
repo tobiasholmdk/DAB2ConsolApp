@@ -13,6 +13,7 @@ namespace DabAflevering2.Entities
         // Nav Props
         public ICollection<StudentCourseEntity> Students { get; set; }
         public ICollection<AssignmentEntity> Assignments { get; set; }
+        public ICollection<ExerciseEntity> Exercises { get; set; }
         public ICollection<TeacherEntity> Teachers { get; set; }
     }
 }
