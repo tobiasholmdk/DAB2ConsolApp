@@ -5,8 +5,7 @@ namespace DabAflevering2.Entities
 {
     public class CourseEntity
     {
-        public int Id { get; set; }
-        [Required]
+        [Key]
         public int CourseId { get; set; }
        // [Required]
         public string Name { get; set; }
