@@ -30,6 +30,9 @@ namespace DabAflevering2
                 
                 switch (input)
                 {
+                    case "V":
+                        c.View(db);
+                        break;
                     case "C":
                         c.CreateDataHandler(db);
                         db.SaveChanges();
@@ -41,7 +44,7 @@ namespace DabAflevering2
                     Console.WriteLine("Press D, and enter for a list of all Assignments");
                     Console.WriteLine("Press F, and enter for a list of all Exercises");
                     Console.WriteLine("Press G, and enter for a list of all Courses");
-                    Console.WriteLine("Press Q, and get list over Assignments which need help");
+                    Console.WriteLine("Press Q, and get list over Assignments which need help for a teacher and his course");
                     Console.WriteLine("Press W, and get list over help requests for course 2");
                 
                     var input2 = Console.ReadLine();
@@ -75,15 +78,53 @@ namespace DabAflevering2
                             }
 
                             break;
+                        
+                        case "Q":
+                            
+                            var teachersList = db.Set<TeacherEntity>().ToList();
+                            var courseIDs = db.Set<CourseEntity>().ToList();
+                            
+                            Console.WriteLine("Choose a Teacher");
+                            foreach (var x in teachersList)
+                            {
+                                Console.WriteLine("Teacher Name:" + x.Name);
+                            }
+                            var inputTeacher = Console.ReadLine();
+                            
+                            Console.WriteLine("Choose a Course ID");
+                            foreach (var x in courseIDs)
+                            {
+                                Console.WriteLine("Course Name: " + x.Name + "  Course ID " + x.CourseId);
+                            }
+                            var inputCourse = Convert.ToInt32(Console.ReadLine());
+                            
+                            var joined = db.Teachers
+                                .Join(db.Exercises,
+                                    t => t.CourseId,
+                                    e => e.CourseId,
+                                    (t, e) => new
+                                    {
+                                        HelpWhere = e.HelpWhere,
+                                        TeacherName = t.Name,
+                                        CourseID = t.CourseId,
+                                        StudentID = e.StudentId
+                                    }
+                                ).Where(e => (e.HelpWhere!=null) && (e.TeacherName == inputTeacher) && (e.CourseID == inputCourse)).ToList();
+                            foreach (var x in joined)
+                            {
+                                Console.WriteLine("Student " + "Needs help at: " + x.HelpWhere + " Student info: " + x.StudentID+ "@post.au.dk" );
+                            }
+                            break;
+                        
                         case "W":
                             var helprequests = db.Set<ExerciseEntity>().ToList();
                             var test = helprequests.Where(x =>
                                 (x.HelpWhere != null));
-                            test.ToList(); 
-                               
+                            test.ToList();
+                            
                             foreach (var x in test)
                             {
-                                Console.WriteLine("Student " + "Needs help at: " + x.HelpWhere + " Student info " );
+                                Console.WriteLine("Student"  + x.Course.Name +  "Needs help at: " + x.HelpWhere + " Student info " );
                             }
                             break;
                         }

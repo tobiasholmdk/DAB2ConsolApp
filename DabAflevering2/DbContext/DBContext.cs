@@ -10,7 +10,7 @@ namespace DabAflevering2.DBContext
     { 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         { 
-            optionsBuilder.UseSqlServer(@"Data Source=localhost,1433;Database=DabDB31;User ID=SA;Password=Januar2020!;");
+            optionsBuilder.UseSqlServer(@"Data Source=localhost,1433;Database=testB;User ID=SA;Password=Januar2020!;");
         }
         public DbSet<StudentEntity> Students { get; set; }
         public DbSet<TeacherEntity> Teachers { get; set; }
@@ -32,8 +32,27 @@ namespace DabAflevering2.DBContext
                 .HasOne(bc => bc.Courses)
                 .WithMany(c => c.Students)
                 .HasForeignKey(bc => bc.CourseId);
+
+            modelBuilder.Entity<ExerciseEntity>()
+                .HasOne(bc => bc.Course)
+                .WithMany(bc => bc.Exercises)
+                .HasForeignKey(bc => bc.CourseId);
+            modelBuilder.Entity<ExerciseEntity>()
+                .HasOne(bc => bc.Student)
+                .WithMany(bc => bc.Exercises)
+                .HasForeignKey(bc => bc.StudentId);
+            modelBuilder.Entity<ExerciseEntity>()
+                .HasOne(bc => bc.Teacher)
+                .WithMany(bc => bc.Exercises)
+                .HasForeignKey(bc => bc.TeacherIds);
+
+            modelBuilder.Entity<AssignmentEntity>()
+                .HasOne(bc => bc.Course)
+                .WithMany(bc => bc.Assignments)
+                .HasForeignKey(bc => bc.CourseId);
+      
             
-            
+
             modelBuilder.Entity<AssignmentStudentEntity>()
                 .HasKey(bc => new { bc.StudentAuId, bc.AssignmentId });  
             modelBuilder.Entity<AssignmentStudentEntity>()
@@ -44,6 +63,7 @@ namespace DabAflevering2.DBContext
                 .HasOne(bc => bc.Assignments)
                 .WithMany(c => c.Students)
                 .HasForeignKey(bc => bc.AssignmentId);
+                
         }
         
         
