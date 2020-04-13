@@ -1,4 +1,4 @@
-namespace Dab_aflevering_2.Contracts
+namespace DabAflevering2.Contracts
     {
         public interface IEntity
         {

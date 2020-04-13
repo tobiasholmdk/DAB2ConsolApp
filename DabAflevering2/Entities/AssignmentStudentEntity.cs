@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dab_aflevering_2.Contracts;
+using DabAflevering2.Contracts;
 
-namespace Dab_aflevering_2.Entities
+namespace DabAflevering2.Entities
 {
     public class AssignmentStudentEntity
     {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DabAflevering2.Migrations
 {
     [DbContext(typeof(DabDBContext))]
-    [Migration("20200413133021_initial")]
-    partial class initial
+    [Migration("20200413103326_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace DabAflevering2.Migrations
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.AssignmentEntity", b =>
                 {
-                    b.Property<int>("AssignmentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -31,14 +31,14 @@ namespace DabAflevering2.Migrations
                     b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeacherAuId")
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("AssignmentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("TeacherAuId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Assignments");
                 });
@@ -53,44 +53,43 @@ namespace DabAflevering2.Migrations
                     b.Property<int>("AssignmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AssignmentsAssignmentId")
+                    b.Property<int?>("AssignmentsId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("NeedHelp")
-                        .HasColumnType("bit");
 
                     b.Property<int>("StudentAuId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentsAuId")
+                    b.Property<int?>("StudentsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignmentsAssignmentId");
+                    b.HasIndex("AssignmentsId");
 
-                    b.HasIndex("StudentsAuId");
+                    b.HasIndex("StudentsId");
 
                     b.ToTable("AssignmentStudents");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.CourseEntity", b =>
                 {
-                    b.Property<int>("CourseId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StudentEntityAuId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.HasKey("CourseId");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("StudentEntityAuId");
+                    b.Property<int?>("StudentEntityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentEntityId");
 
                     b.ToTable("Courses");
                 });
@@ -106,23 +105,22 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lecture")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Number")
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentAuId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherAuId")
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentAuId");
+                    b.HasIndex("StudentId");
 
-                    b.HasIndex("TeacherAuId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Exercises");
                 });
@@ -137,7 +135,7 @@ namespace DabAflevering2.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CoursesCourseId")
+                    b.Property<int?>("CoursesId")
                         .HasColumnType("int");
 
                     b.Property<int>("Semester")
@@ -146,49 +144,53 @@ namespace DabAflevering2.Migrations
                     b.Property<int>("StudentAuId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentsAuId")
+                    b.Property<int?>("StudentsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CoursesCourseId");
+                    b.HasIndex("CoursesId");
 
-                    b.HasIndex("StudentsAuId");
+                    b.HasIndex("StudentsId");
 
                     b.ToTable("StudentsCourses");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.StudentEntity", b =>
                 {
-                    b.Property<int>("AuId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AuId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AuId");
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.TeacherEntity", b =>
                 {
-                    b.Property<int>("AuId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AuId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
@@ -203,47 +205,47 @@ namespace DabAflevering2.Migrations
 
                     b.HasOne("Dab_aflevering_2.Entities.TeacherEntity", "Teacher")
                         .WithMany("Assignments")
-                        .HasForeignKey("TeacherAuId");
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.AssignmentStudentEntity", b =>
                 {
                     b.HasOne("Dab_aflevering_2.Entities.AssignmentEntity", "Assignments")
                         .WithMany("Students")
-                        .HasForeignKey("AssignmentsAssignmentId");
+                        .HasForeignKey("AssignmentsId");
 
                     b.HasOne("Dab_aflevering_2.Entities.StudentEntity", "Students")
                         .WithMany("Assignments")
-                        .HasForeignKey("StudentsAuId");
+                        .HasForeignKey("StudentsId");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.CourseEntity", b =>
                 {
                     b.HasOne("Dab_aflevering_2.Entities.StudentEntity", null)
                         .WithMany("Courses")
-                        .HasForeignKey("StudentEntityAuId");
+                        .HasForeignKey("StudentEntityId");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.ExerciseEntity", b =>
                 {
                     b.HasOne("Dab_aflevering_2.Entities.StudentEntity", "Student")
                         .WithMany("Exercises")
-                        .HasForeignKey("StudentAuId");
+                        .HasForeignKey("StudentId");
 
                     b.HasOne("Dab_aflevering_2.Entities.TeacherEntity", "Teacher")
                         .WithMany("Exercises")
-                        .HasForeignKey("TeacherAuId");
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.StudentCourseEntity", b =>
                 {
                     b.HasOne("Dab_aflevering_2.Entities.CourseEntity", "Courses")
                         .WithMany("Students")
-                        .HasForeignKey("CoursesCourseId");
+                        .HasForeignKey("CoursesId");
 
                     b.HasOne("Dab_aflevering_2.Entities.StudentEntity", "Students")
                         .WithMany()
-                        .HasForeignKey("StudentsAuId");
+                        .HasForeignKey("StudentsId");
                 });
 
             modelBuilder.Entity("Dab_aflevering_2.Entities.TeacherEntity", b =>

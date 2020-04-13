@@ -1,6 +1,5 @@
-using Dab_aflevering_2.DBContext;
-using Dab_aflevering_2.Entities;
-using System.Collections.Generic;
+using DabAflevering2.DBContext;
+using DabAflevering2.Entities;
 
 namespace DabAflevering2
 {
