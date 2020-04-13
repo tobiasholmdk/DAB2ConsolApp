@@ -3,7 +3,7 @@ using Dab_aflevering_2.Contracts;
 
 namespace DabAflevering2.Entities
 {
-    public class AssignmentEntity
+    public class AssignmentEntity 
     {
         public int Id { get; set; }
         
