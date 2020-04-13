@@ -1,5 +1,6 @@
 using Dab_aflevering_2.DBContext;
 using Dab_aflevering_2.Entities;
+using System.Collections.Generic;
 
 namespace DabAflevering2
 {
@@ -9,22 +10,66 @@ namespace DabAflevering2
         {
             using var db = new DabDBContext();
             
-            TeacherEntity teacher = new TeacherEntity();
-            teacher.Name = "Teacher1";
-            db.Add(teacher);
+            TeacherEntity teacher1 = new TeacherEntity();
+            teacher1.Name = "Henrik Kirk";
+            db.Add(teacher1);
  
-            teacher = new TeacherEntity();
-            teacher.Name = "Teacher2";
-            db.Add(teacher);
+            TeacherEntity teacher2 = new TeacherEntity();
+            teacher2.Name = "Søren";
+            db.Add(teacher1);
                     
-            StudentEntity student = new StudentEntity();
-            student.Name = "Student1";
-            db.Add(student);
+            StudentEntity student1 = new StudentEntity();
+            student1.Name = "Sebastian";
+            db.Add(student1);
                     
-            student = new StudentEntity();
-            student.Name = "Student2";
-            db.Add(student);
-                    
+            StudentEntity student2 = new StudentEntity();
+            student2.Name = "Tobias";
+            db.Add(student2);
+
+            StudentEntity student0 = new StudentEntity();
+            student0.Name = "Gustav";
+            db.Add(student0);
+
+            ExerciseEntity exercise1 = new ExerciseEntity();
+            exercise1.Number = 2;
+            exercise1.Lecture = "3 EF core";
+            exercise1.Teacher = teacher1;
+            db.Add(exercise1);
+
+            ExerciseEntity exercise2 = new ExerciseEntity();
+            exercise2.Number = 3;
+            exercise2.Lecture = "3 EF core";
+            exercise2.Teacher = teacher1;
+            db.Add(exercise2);
+
+           
+            AssignmentEntity assignment1 = new AssignmentEntity();
+            assignment1.Teacher = teacher2;
+            db.Add(assignment1);
+            AssignmentEntity assignment2 = new AssignmentEntity();
+            assignment2.Teacher = teacher2;
+            db.Add(assignment2);
+
+            CourseEntity course = new CourseEntity()
+            {
+                Name = "Databaser",
+                Assignments = new List<AssignmentEntity>
+                {
+                    new AssignmentEntity
+                    {
+                        Teacher = teacher1
+                    },
+                    assignment1,
+                    assignment2
+                },
+                Teachers = new List<TeacherEntity>()
+                { 
+                    teacher1,
+                    teacher2
+                }
+            };
+            db.Add(course);
+
             db.SaveChanges();
         }
 
