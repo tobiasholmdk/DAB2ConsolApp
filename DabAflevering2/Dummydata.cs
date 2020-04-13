@@ -83,7 +83,7 @@ namespace DabAflevering2
                 }
             };
             
-            db.Add(course);
+            db.Add(course3);
             CourseEntity course2 = new CourseEntity()
             {
                 Name = "SWD",
@@ -101,7 +101,7 @@ namespace DabAflevering2
                 }
             };
             
-            db.Add(course);
+            db.Add(course2);
             
             ExerciseEntity exercise1 = new ExerciseEntity();
             exercise1.Number = 2;

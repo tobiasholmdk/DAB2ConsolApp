@@ -23,13 +23,16 @@ namespace DabAflevering2
 
             while (true)
             {
-                Console.WriteLine("Press A to query data");
+                Console.WriteLine("Press A to list data");
                 Console.WriteLine("Press C, to create new data");
 
                 var input = Console.ReadLine();
                 
                 switch (input)
                 {
+                    case "V":
+                        c.View(db);
+                        break;
                     case "C":
                         c.CreateDataHandler(db);
                         db.SaveChanges();
