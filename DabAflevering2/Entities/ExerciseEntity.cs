@@ -14,6 +14,7 @@ namespace DabAflevering2.Entities
         // Nav props
         public TeacherEntity Teacher { get; set; }
         public StudentEntity Student { get; set; }
+        public int StudentAuId { get; set; }
         public CourseEntity Course { get; set; }
     }
 }
