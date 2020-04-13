@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Dab_aflevering_2.Contracts;
 
 namespace Dab_aflevering_2.Entities
 {
-    public class CourseEntity : IEntity
+    public class CourseEntity 
     {
-        public int Id { get; set; }
+        [Key]
         public int CourseId { get; set; }
+        [Required]
         public string Name { get; set; }
 
         // Nav Props

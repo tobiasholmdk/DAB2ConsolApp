@@ -9,7 +9,7 @@ namespace Dab_aflevering_2.DBContext
     { 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         { 
-            optionsBuilder.UseSqlServer(@"Data Source=localhost,1433;Database=DabDB;User ID=SA;Password=Januar2020!;");
+            optionsBuilder.UseSqlServer(@"Server=localhost:1433;Database=SchoolDB;Trusted_Connection=True;");
         }
         public DbSet<StudentEntity> Students { get; set; }
         public DbSet<TeacherEntity> Teachers { get; set; }

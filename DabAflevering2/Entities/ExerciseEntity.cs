@@ -1,13 +1,17 @@
+using System.ComponentModel.DataAnnotations;
 using Dab_aflevering_2.Contracts;
 
 namespace Dab_aflevering_2.Entities
 {
-    public class ExerciseEntity : IEntity
+    public class ExerciseEntity 
     {
         public int Id { get; set; }
-        public string Number { get; set; }
+        [Required]
+        public int Number { get; set; }
+        [Required]
         public string Lecture { get; set; }
-        public string HelpWhere { get; set; }
+        
+        public string? HelpWhere { get; set; }
         
         // Nav props
         public TeacherEntity Teacher { get; set; }
