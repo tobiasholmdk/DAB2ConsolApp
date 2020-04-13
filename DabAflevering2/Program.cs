@@ -83,19 +83,21 @@ namespace DabAflevering2
                             
                             var teachersList = db.Set<TeacherEntity>().ToList();
                             var courseIDs = db.Set<CourseEntity>().ToList();
+                            
                             Console.WriteLine("Choose a Teacher");
                             foreach (var x in teachersList)
                             {
                                 Console.WriteLine("Teacher Name:" + x.Name);
                             }
                             var inputTeacher = Console.ReadLine();
-                            Console.WriteLine("Choose a Course ID");
                             
+                            Console.WriteLine("Choose a Course ID");
                             foreach (var x in courseIDs)
                             {
                                 Console.WriteLine("Course Name: " + x.Name + "  Course ID " + x.CourseId);
                             }
                             var inputCourse = Convert.ToInt32(Console.ReadLine());
+                            
                             var joined = db.Teachers
                                 .Join(db.Exercises,
                                     t => t.CourseId,
@@ -112,10 +114,8 @@ namespace DabAflevering2
                             {
                                 Console.WriteLine("Student " + "Needs help at: " + x.HelpWhere + " Student info: " + x.StudentID+ "@post.au.dk" );
                             }
-
                             break;
                         
-                          
                         case "W":
                             var helprequests = db.Set<ExerciseEntity>().ToList();
                             var test = helprequests.Where(x =>
