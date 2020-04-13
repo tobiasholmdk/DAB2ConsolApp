@@ -21,16 +21,16 @@ namespace DabAflevering2
         public void CreateNewTeacher(DabDBContext db)
         {
             TeacherEntity teacher = new TeacherEntity();
-            Console.WriteLine("write teacher name:");
+            Console.WriteLine("Write teacher name:");
             teacher.Name = Console.ReadLine();
             db.Add(teacher);
         }
         public void CreateNewExecersise(DabDBContext db)
         {
             ExerciseEntity exercise = new ExerciseEntity();
-            Console.WriteLine("Write nr of the exercise:");
+            Console.WriteLine("Write Nr of the exercise:");
             exercise.Number = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("write name of lecture");
+            Console.WriteLine("Write name of lecture");
             exercise.Lecture = Console.ReadLine();
             db.Add(exercise);
         }
@@ -114,8 +114,8 @@ namespace DabAflevering2
             {
                 Console.WriteLine("Press a key to create different objects");
                 Console.WriteLine("A for student, B for teacher");
-                Console.WriteLine("C for Exercse, D for Assignment, E for Course");
-                Console.WriteLine("F for help with exercise, G for help with assigment");
+                Console.WriteLine("C for Exercise, D for Assignment, E for Course");
+                Console.WriteLine("F for help with exercise, G for help with assignment");
                 Console.WriteLine("Any other key to go back");
                 var input = Console.ReadLine();
                 switch (input)
