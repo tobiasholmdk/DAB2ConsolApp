@@ -67,7 +67,6 @@ namespace DabAflevering2
                     teacher2
                 }
             };
-            db.Add(course);
             CourseEntity course3 = new CourseEntity()
             {
                 Name = "MMLS",

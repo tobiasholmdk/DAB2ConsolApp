@@ -97,7 +97,7 @@ namespace DabAflevering2.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentAuId")
+                    b.Property<int?>("StudentAuId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeacherAuId")
@@ -206,9 +206,7 @@ namespace DabAflevering2.Migrations
 
                     b.HasOne("DabAflevering2.Entities.StudentEntity", "Student")
                         .WithMany("Exercises")
-                        .HasForeignKey("StudentAuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentAuId");
 
                     b.HasOne("DabAflevering2.Entities.TeacherEntity", "Teacher")
                         .WithMany("Exercises")
