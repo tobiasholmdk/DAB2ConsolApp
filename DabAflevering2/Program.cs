@@ -75,6 +75,7 @@ namespace DabAflevering2
                         break;
                     case "C":
                         c.CreateDataHandler(db);
+                        db.SaveChanges();
                         break;
 
                 }
