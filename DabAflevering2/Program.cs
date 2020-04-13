@@ -76,10 +76,14 @@ namespace DabAflevering2
 
                             break;
                         case "W":
-                            var joins = db.Set<StudentCourseEntity>().ToList();
-                            foreach (var x in joins)
+                            var helprequests = db.Set<ExerciseEntity>().ToList();
+                            var test = helprequests.Where(x =>
+                                (x.HelpWhere != null));
+                            test.ToList(); 
+                               
+                            foreach (var x in test)
                             {
-                              Console.WriteLine("Course ID " + x.CourseId + " Course Name: " + x.StudentAuId + " Teacher " + x.Courses );
+                                Console.WriteLine("Student " + "Needs help at: " + x.HelpWhere + " Student info " );
                             }
                             break;
                         }
