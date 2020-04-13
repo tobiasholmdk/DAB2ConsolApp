@@ -7,10 +7,9 @@ namespace DabAflevering2.Entities
     {
         [Key]
         public int CourseId { get; set; }
-       // [Required]
+        [Required]
         public string Name { get; set; }
 
-        // Nav Props
         public ICollection<StudentCourseEntity> Students { get; set; }
         public ICollection<AssignmentEntity> Assignments { get; set; }
         public ICollection<ExerciseEntity> Exercises { get; set; }

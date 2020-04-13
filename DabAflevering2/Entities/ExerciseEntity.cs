@@ -11,9 +11,12 @@ namespace DabAflevering2.Entities
         public string Lecture { get; set; }
         public string? HelpWhere { get; set; }
         
-        // Nav props
+        
+        public int TeacherIds { get; set; }
         public TeacherEntity Teacher { get; set; }
+        public int StudentId { get; set; }
         public StudentEntity Student { get; set; }
+        public int CourseId { get; set; }
         public CourseEntity Course { get; set; }
     }
 }

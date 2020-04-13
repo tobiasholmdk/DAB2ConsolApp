@@ -26,7 +26,7 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeacherAuId")
@@ -70,6 +70,7 @@ namespace DabAflevering2.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseId");
@@ -84,7 +85,7 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("HelpWhere")
@@ -97,19 +98,19 @@ namespace DabAflevering2.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentAuId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeacherAuId")
+                    b.Property<int>("TeacherIds")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("StudentAuId");
+                    b.HasIndex("StudentId");
 
-                    b.HasIndex("TeacherAuId");
+                    b.HasIndex("TeacherIds");
 
                     b.ToTable("Exercises");
                 });
@@ -158,11 +159,10 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AuId");
@@ -176,7 +176,9 @@ namespace DabAflevering2.Migrations
                 {
                     b.HasOne("DabAflevering2.Entities.CourseEntity", "Course")
                         .WithMany("Assignments")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DabAflevering2.Entities.TeacherEntity", "Teacher")
                         .WithMany("Assignments")
@@ -202,15 +204,21 @@ namespace DabAflevering2.Migrations
                 {
                     b.HasOne("DabAflevering2.Entities.CourseEntity", "Course")
                         .WithMany("Exercises")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DabAflevering2.Entities.StudentEntity", "Student")
                         .WithMany("Exercises")
-                        .HasForeignKey("StudentAuId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DabAflevering2.Entities.TeacherEntity", "Teacher")
                         .WithMany("Exercises")
-                        .HasForeignKey("TeacherAuId");
+                        .HasForeignKey("TeacherIds")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DabAflevering2.Entities.StudentCourseEntity", b =>
@@ -232,7 +240,9 @@ namespace DabAflevering2.Migrations
                 {
                     b.HasOne("DabAflevering2.Entities.CourseEntity", "Course")
                         .WithMany("Teachers")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

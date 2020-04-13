@@ -8,12 +8,11 @@ namespace DabAflevering2.Entities
         [Key]
         public int AssignmentId { get; set; }
         
-        // Nav props
-        
         public TeacherEntity Teacher { get; set; }
-        //public int TeacherId { get; set; }
+        
+        public int CourseId { get; set; }
         public CourseEntity Course { get; set; }
-        //public int CourseId { get; set; }
+        
         public ICollection<AssignmentStudentEntity> Students { get; set; }
     }
 }

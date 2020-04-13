@@ -10,7 +10,6 @@ namespace DabAflevering2.Entities
         [Required]
         public string Name { get; set; }
 
-        //Nav props:
         public ICollection<StudentCourseEntity> Courses { get; set; }
         public ICollection<ExerciseEntity> Exercises { get; set; }
         public ICollection<AssignmentStudentEntity> Assignments { get; set; }
