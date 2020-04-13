@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Dab_aflevering_2.Contracts;
 
-namespace Dab_aflevering_2.Entities
+namespace DabAflevering2.Entities
 {
     public class StudentEntity
     {
         [Key]
         public int AuId { get; set; } 
         
-        [Required]
+        //[Required]
         public string Name { get; set; }
 
         //Nav props:

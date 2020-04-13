@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DabAflevering2.Migrations
 {
     [DbContext(typeof(DabDBContext))]
-    [Migration("20200413082841_initial")]
-    partial class initial
+    [Migration("20200413103326_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

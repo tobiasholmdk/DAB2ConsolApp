@@ -1,9 +1,9 @@
-using Dab_aflevering_2.Entities;
+using DabAflevering2.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 
-namespace Dab_aflevering_2.DBContext
+namespace DabAflevering2.DBContext
 {
     public class DabDBContext : DbContext
     { 

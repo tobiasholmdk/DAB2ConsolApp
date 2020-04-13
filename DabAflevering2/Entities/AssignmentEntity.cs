@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Dab_aflevering_2.Contracts;
 
-namespace Dab_aflevering_2.Entities
+namespace DabAflevering2.Entities
 {
     public class AssignmentEntity
     {
