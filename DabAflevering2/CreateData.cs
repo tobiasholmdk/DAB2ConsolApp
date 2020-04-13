@@ -10,7 +10,8 @@ namespace DabAflevering2
 {
     public class CreateData
     {
-
+        public void View(DabDBContext db)
+        {        }
         public void CreateNewStudent(DabDBContext db)
         {
             StudentEntity student = new StudentEntity();
