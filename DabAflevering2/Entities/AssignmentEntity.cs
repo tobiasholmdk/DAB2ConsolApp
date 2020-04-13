@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DabAflevering2.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DabAflevering2.Entities
 {
