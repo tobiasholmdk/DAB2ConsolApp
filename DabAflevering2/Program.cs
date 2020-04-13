@@ -12,30 +12,14 @@ namespace DabAflevering2
     {
         static void Main(string[] args)
         {
-            InsertDummyData();
-        }
-        
-        static void InsertDummyData()
-        {
-            using var db = new DabDBContext();
+            var a = new DummyData(); 
+            a.InsertDummyData();
+            while (true)
+                
+            {
+                
+            }
             
-            TeacherEntity teacher = new TeacherEntity();
-            teacher.Name = "Teacher1";
-            db.Add(teacher);
- 
-            teacher = new TeacherEntity();
-            teacher.Name = "Teacher2";
-            db.Add(teacher);
-                    
-            StudentEntity student = new StudentEntity();
-            student.Name = "Student1";
-            db.Add(student);
-                    
-            student = new StudentEntity();
-            student.Name = "Student2";
-            db.Add(student);
-                    
-            db.SaveChanges();
         }
         
     }
