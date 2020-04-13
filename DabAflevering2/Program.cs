@@ -30,9 +30,6 @@ namespace DabAflevering2
                 
                 switch (input)
                 {
-                    case "V":
-                        c.View(db);
-                        break;
                     case "C":
                         c.CreateDataHandler(db);
                         db.SaveChanges();
