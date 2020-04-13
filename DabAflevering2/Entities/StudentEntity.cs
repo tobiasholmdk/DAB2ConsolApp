@@ -12,7 +12,7 @@ namespace DabAflevering2.Entities
         public string Name { get; set; }
 
         //Nav props:
-        public ICollection<CourseEntity> Courses { get; set; }
+        public ICollection<StudentCourseEntity> Courses { get; set; }
         public ICollection<ExerciseEntity> Exercises { get; set; }
         public ICollection<AssignmentStudentEntity> Assignments { get; set; }
 

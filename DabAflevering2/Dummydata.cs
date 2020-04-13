@@ -15,11 +15,11 @@ namespace DabAflevering2
             db.Add(teacher1);
  
             TeacherEntity teacher2 = new TeacherEntity();
-            teacher2.Name = "Søren";
+            teacher2.Name = "Sï¿½ren";
             db.Add(teacher1);
                     
             StudentEntity student1 = new StudentEntity();
-            student1.Name = "Sebastian";
+            student1.Name = "Sebastian";  
             db.Add(student1);
                     
             StudentEntity student2 = new StudentEntity();
@@ -42,7 +42,6 @@ namespace DabAflevering2
             exercise2.Teacher = teacher1;
             db.Add(exercise2);
 
-           
             AssignmentEntity assignment1 = new AssignmentEntity();
             assignment1.Teacher = teacher2;
             db.Add(assignment1);
@@ -50,6 +49,10 @@ namespace DabAflevering2
             assignment2.Teacher = teacher2;
             db.Add(assignment2);
 
+      
+
+            
+            
             CourseEntity course = new CourseEntity()
             {
                 Name = "Databaser",
@@ -68,8 +71,37 @@ namespace DabAflevering2
                     teacher2
                 }
             };
+            
             db.Add(course);
 
+            StudentCourseEntity joinedStudCourse = new StudentCourseEntity()
+            {
+                Students = student0,
+                StudentAuId = student0.AuId,
+                Courses = course,
+                CourseId = course.CourseId,
+            };
+            db.Add(joinedStudCourse);
+            joinedStudCourse = new StudentCourseEntity()
+            {
+                Students = student1,
+                StudentAuId = student1.AuId,
+                Courses = course,
+                CourseId = course.CourseId,
+            };
+            db.Add(joinedStudCourse);
+            joinedStudCourse = new StudentCourseEntity()
+            {
+                Students = student2,
+                StudentAuId = student2.AuId,
+                Courses = course,
+                CourseId = course.CourseId,
+            };
+
+            
+            
+            db.Add(joinedStudCourse);
+            
             db.SaveChanges();
         }
 
