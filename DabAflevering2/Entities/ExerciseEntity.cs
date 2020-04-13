@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using DabAflevering2.Contracts;
 
 namespace DabAflevering2.Entities
 {

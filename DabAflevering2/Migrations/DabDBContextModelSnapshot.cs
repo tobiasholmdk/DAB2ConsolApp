@@ -84,6 +84,9 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("HelpWhere")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,6 +104,8 @@ namespace DabAflevering2.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("StudentAuId");
 
@@ -195,6 +200,10 @@ namespace DabAflevering2.Migrations
 
             modelBuilder.Entity("DabAflevering2.Entities.ExerciseEntity", b =>
                 {
+                    b.HasOne("DabAflevering2.Entities.CourseEntity", "Course")
+                        .WithMany("Exercises")
+                        .HasForeignKey("CourseId");
+
                     b.HasOne("DabAflevering2.Entities.StudentEntity", "Student")
                         .WithMany("Exercises")
                         .HasForeignKey("StudentAuId");

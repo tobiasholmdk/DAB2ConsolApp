@@ -3,9 +3,8 @@ using System.Collections.Generic;
  using System.ComponentModel.DataAnnotations;
  using System.Linq;
 using System.Threading.Tasks;
-using DabAflevering2.Contracts;
 
-namespace DabAflevering2.Entities
+ namespace DabAflevering2.Entities
 {
     public class StudentCourseEntity
     {

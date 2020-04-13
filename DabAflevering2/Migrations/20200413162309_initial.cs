@@ -114,11 +114,18 @@ namespace DabAflevering2.Migrations
                     Lecture = table.Column<string>(nullable: false),
                     HelpWhere = table.Column<string>(nullable: true),
                     TeacherAuId = table.Column<int>(nullable: true),
-                    StudentAuId = table.Column<int>(nullable: true)
+                    StudentAuId = table.Column<int>(nullable: true),
+                    CourseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exercises", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exercises_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Exercises_Students_StudentAuId",
                         column: x => x.StudentAuId,
@@ -173,6 +180,11 @@ namespace DabAflevering2.Migrations
                 name: "IX_AssignmentStudents_AssignmentId",
                 table: "AssignmentStudents",
                 column: "AssignmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exercises_CourseId",
+                table: "Exercises",
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_StudentAuId",
