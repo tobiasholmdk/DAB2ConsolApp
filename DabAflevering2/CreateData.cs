@@ -36,6 +36,8 @@ namespace DabAflevering2
         public void CreateNewAssignment(DabDBContext db)
         {
             AssignmentEntity assignment = new AssignmentEntity();
+            Console.WriteLine("Write Nr of the Asssignment:");
+            assignment.AssignmentId = Convert.ToInt32(Console.ReadLine());
             db.Add(assignment);
         }
         public void CreateNewCourse(DabDBContext db)
@@ -52,9 +54,9 @@ namespace DabAflevering2
             foreach (var x in student)
             {
                 Console.WriteLine(
-                    "Nr:" + i +
-                    "Student ID " + x.AuId +
-                    "Student Name: " + x.Name);
+                    " Nr: " + i +
+                    " Student ID " + x.AuId +
+                    " Student Name: " + x.Name);
                 i++;
             }
             Console.WriteLine("Type Nr of the user to request help:");
@@ -65,8 +67,8 @@ namespace DabAflevering2
             foreach (var x in exercise)
             {
                 Console.WriteLine(
-                    "Nr:" + i +
-                    "Exercise Name: " + x.Lecture);
+                    " Nr:" + i +
+                    " Exercise Name: " + x.Lecture);
                 i++;
             }
             Console.WriteLine("Type Nr of the exercise you want help with:");
@@ -83,9 +85,9 @@ namespace DabAflevering2
             foreach (var x in student)
             {
                 Console.WriteLine(
-                    "Nr:" + i + "\n" +
-                    "Student ID " + x.AuId + "\n" +
-                    "Student Name: " + x.Name);
+                    " Nr:" + i + "\n" +
+                    " Student ID " + x.AuId + "\n" +
+                    " Student Name: " + x.Name);
                 i++;
             }
             Console.WriteLine("Type Nr of the user to request help:");
@@ -97,8 +99,8 @@ namespace DabAflevering2
             foreach (var x in assignment)
             {
                 Console.WriteLine(
-                    "Nr:" + i + "\n" +
-                    "Exercise Id: " + x.AssignmentId);
+                    " Nr:" + i + "\n" +
+                    " Exercise Id: " + x.AssignmentId);
                 i++;
             }
             Console.WriteLine("Type Nr of the exercise you want help with:");
