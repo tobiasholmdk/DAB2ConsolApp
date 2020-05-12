@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DabAflevering2.DBContext;
 using DabAflevering2.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DabAflevering2
 {
@@ -71,8 +72,7 @@ namespace DabAflevering2
                         Console.ReadLine();
                         break;
                     case "7":
-                        HelpByStudentView();  
-                        Console.WriteLine("----------------------------------------------------------------------------------------");
+                        HelpByStudentView();
                         Console.WriteLine("Press a key to continue");
                         Console.ReadLine();
                         break;
@@ -127,89 +127,114 @@ namespace DabAflevering2
 
         private void helpByTeacherAndCourseView()
         {
-            
-            var teachersList = _db.Set<TeacherEntity>().ToList();
-            var courseIDs = _db.Set<CourseEntity>().ToList();
-
-            Console.WriteLine("Choose a Teacher");
-            foreach (var x in teachersList)
-            {
-                Console.WriteLine("Teacher Name:" + x.Name);
-            }
-            var inputTeacher = Console.ReadLine();
-
+            var courses = _db.Courses
+                .Include(t => t.Teachers)
+                .Include(a => a.Assignments)
+                .ThenInclude(s => s.Students)
+                .Include(e => e.Exercises).ToList();
+            Console.WriteLine("----------------------------------------------------------------------------------------");
             Console.WriteLine("Choose a Course ID");
-            foreach (var x in courseIDs)
+            foreach (var co in courses)
             {
-                Console.WriteLine("Course Name: " + x.Name + "  Course ID " + x.CourseId);
+                Console.WriteLine("Course Name: " + co.Name + "  Course ID " + co.CourseId);
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
             var inputCourse = Convert.ToInt32(Console.ReadLine());
-
-            var joined = _db.Teachers
-                .Join(_db.Exercises,
-                    t => t.CourseId,
-                    e => e.CourseId,
-                    (t, e) => new
-                    {
-                        HelpWhere = e.HelpWhere,
-                        TeacherName = t.Name,
-                        CourseID = t.CourseId,
-                        StudentID = e.StudentId
-                    }
-                    ).Where(e => (e.HelpWhere != null) && (e.TeacherName == inputTeacher) && (e.CourseID == inputCourse)).ToList();
-                                    
-            var finaljoin = joined.Join(_db.AssignmentStudents, j => j.CourseID, a => a.AssignmentId,
-                (j, a) => new
-                {
-                    HelpWhere = j.HelpWhere,
-                    TeacherName = j.TeacherName,
-                    CourseID = j.CourseID,
-                    StudentID = j.StudentID,
-                    AssignmentId = a.AssignmentId,
-                    AssignmentHelp = a.NeedHelp
-                }).Where(x => x.AssignmentHelp != null).ToList();
-                                    
-            foreach (var x in finaljoin)
+            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("Choose a Teacher");
+            var course = courses.Find(i => i.CourseId == inputCourse);
+            foreach (var t in course.Teachers)
             {
-                Console.WriteLine("Student " + x.StudentID + "Needs help at: " + x.HelpWhere + " Student info: au" + x.StudentID + "@post.au.dk");
+                Console.WriteLine("Teacher Name:" + t.Name + " Teacher Id " + t.AuId);
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+            }
+            var inputTeacher = Console.ReadLine();
+            foreach (var ass in course.Assignments)
+            {
+                foreach (var s in ass.Students)
+                {
+                    if (s.NeedHelp == true)
+                    {
+                        Console.WriteLine("Student " + s.StudentAuId + " Needs help with assignment " + ass.AssignmentId + " in course " + course.Name);
+                    }
+                    Console.WriteLine("----------------------------------------------------------------------------------------");
+                }
+            }
+            foreach (var ex in course.Exercises)
+            {
+                if (ex.HelpWhere != null)
+                {
+                    Console.WriteLine("Student " + ex.StudentId + " Needs help with exercise " + ex.Id + " in course " + course.Name);
+                }
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
         }
 
         private void HelpByStudentView()
         {
-            var student = _db.Set<StudentEntity>().ToList();
+            var students1 = _db.Students
+                .Include(a => a.Assignments)
+                .Include(e => e.Exercises)
+                .ToList();
             int i = 0;
-            foreach (var x in student)
+            foreach (var x in students1)
             {
                 Console.WriteLine(
                     " Nr:" + i + "\n" +
                     " Student AUId " + x.AuId + "\n" +
                     " Student Name: " + x.Name);
                 i++;
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
             Console.WriteLine("Write student auId to find his/hers help requests: ");
             int auId = Convert.ToInt32(Console.ReadLine());
-            var helprequests = _db.Set<ExerciseEntity>().ToList();
-            var test = helprequests.Where(x =>
-                (x.HelpWhere != null) && (x.StudentId == auId));
-            test.ToList();
+            var student = students1.Find(x => x.AuId == auId);
 
-            foreach (var x in test)
+            foreach (var x in student.Assignments)
             {
-                Console.WriteLine("Needs help at: " + x.HelpWhere); 
-                Console.WriteLine("Contact info: au" + x.StudentId + "@post.au.dk");
+                if (x.NeedHelp != false)
+                {
+                    Console.WriteLine("Needs help at: " + x.NeedHelp);
+                    Console.WriteLine("Contact info: au" + x.StudentAuId + "@post.au.dk");
+                }
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+            }
+            foreach (var x in student.Exercises)
+            {
+                if (x.HelpWhere != null)
+                {
+                    Console.WriteLine("Needs help at: " + x.HelpWhere);
+                    Console.WriteLine("Contact info: au" + x.StudentId + "@post.au.dk");
+                }
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
         }
 
         private void HelpstatsView()
         {
-            int ExerciseCount = _db.Exercises.Count(t => t.HelpWhere == null);
-            int AssignmentCount = _db.AssignmentStudents.Count(t => t.NeedHelp == false);
-            int ExerciseTotal = _db.Exercises.Count(t => t.HelpWhere != null);
-            int AssignmentTotal = _db.AssignmentStudents.Count(t => t.NeedHelp == true);
-
-            Console.WriteLine("Number of open requests: " + (ExerciseTotal + AssignmentTotal));
-            Console.WriteLine("Number of close requests: " + (ExerciseCount + AssignmentCount));
+            var allCourses = _db.Courses
+                .Include(e => e.Exercises)
+                .Include(a => a.Assignments)
+                .ThenInclude(s => s.Students).ToList();
+            foreach (var y in allCourses)
+            {
+                Console.WriteLine("Course " + y.Name + " has " + y.Assignments.Count() + " Assignments & " + y.Exercises.Count() + " exercises");
+                int index = 0;
+                foreach (var ass in y.Assignments)
+                {
+                    foreach (var s in ass.Students)
+                    {
+                        
+                        if (s.NeedHelp == true)
+                        {
+                            index++;
+                        }
+                    }
+                    
+                }
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine("there are " + index + " open request for assignemts and " + y.Exercises.Where(x => x.HelpWhere != null).Count() + " exercises open");
+            }
         }
     }
 }
