@@ -49,7 +49,7 @@ namespace DabAflevering2
                             Console.WriteLine("Press G, and enter for a list of all Courses");
                             Console.WriteLine("Press Q, and get list over Assignments which need help for a teacher and the course");
                             Console.WriteLine("Press W, and get list over help requests from a student");
-                            Console.WriteLine("Press B, and get statistics of request");
+                            Console.WriteLine("Press s, and get statistics of request");
 
                             var input2 = Console.ReadLine();
                             switch (input2)
@@ -152,21 +152,18 @@ namespace DabAflevering2
 
                                     foreach (var x in test)
                                     {
-                                        Console.WriteLine("Needs help at: " + x.HelpWhere);
+                                        Console.WriteLine("Needs help at: " + x.HelpWhere); 
                                         Console.WriteLine("Contact info: au" + x.StudentId + "@post.au.dk");
                                     }
                                     break;
-                                case "B":
-                                    var xd = db.Set<CourseEntity>().ToList();
-                                    foreach (var x in xd)
-                                    {
-                                        int ExerciseCount = db.Exercises.Count(t => (t.HelpWhere == null) && (x.CourseId == t.CourseId));
-                                        int ExerciseTotal = db.Exercises.Count(t => (t.HelpWhere != null) && (x.CourseId == t.CourseId));
+                                case "s":
+                                    int ExerciseCount = db.Exercises.Count(t => t.HelpWhere == null);
+                                    int AssignmentCount = db.AssignmentStudents.Count(t => t.NeedHelp == false);
+                                    int ExerciseTotal = db.Exercises.Count(t => t.HelpWhere != null);
+                                    int AssignmentTotal = db.AssignmentStudents.Count(t => t.NeedHelp == true);
 
-                                        Console.WriteLine("Course: " + x.Name);
-                                        Console.WriteLine("Number of open requests: " + (ExerciseTotal));
-                                        Console.WriteLine("Number of close requests: " + (ExerciseCount));
-                                    }
+                                    Console.WriteLine("Number of open requests: " + (ExerciseTotal + AssignmentTotal));
+                                    Console.WriteLine("Number of close requests: " + (ExerciseCount + AssignmentCount));
                                     break;
 
                             }
