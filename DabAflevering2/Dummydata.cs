@@ -164,8 +164,11 @@ namespace DabAflevering2
                 Students = student2,
                 Courses = course,
             };
-
-            
+            var testAss = new AssignmentStudentEntity()
+            {
+                Students = student0,
+                Assignments = assignment1,
+            };
             
             db.Add(joinedStudCourse);
         
