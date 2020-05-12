@@ -91,7 +91,8 @@ namespace DabAflevering2
                 {
                     new AssignmentEntity
                     {
-                        Teacher = teacher1
+                        Teacher = teacher1,
+                        
                     },
                     assignment3
                 },
