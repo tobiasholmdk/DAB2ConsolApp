@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 using DabAflevering2.Entities;
 using DabAflevering2.DBContext;
 
@@ -114,33 +112,55 @@ namespace DabAflevering2
             while(!leave)
             {
                 Console.WriteLine("Press a key to create different objects");
-                Console.WriteLine("A for student, B for teacher");
-                Console.WriteLine("C for Exercise, D for Assignment, E for Course");
-                Console.WriteLine("F for help with exercise, G for help with assignment");
+                Console.WriteLine("1 for student, 2 for teacher");
+                Console.WriteLine("3 for Exercise, 4 for Assignment, 5 for Course");
+                Console.WriteLine("6 for help with exercise, 7 for help with assignment");
                 Console.WriteLine("Any other key to go back");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
                 var input = Console.ReadLine();
                 switch (input)
                 {
-                    case "A":
+                    case "1":
                         CreateNewStudent(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "B":
+                    case "2":
                         CreateNewTeacher(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "C":
+                    case "3":
                         CreateNewExecersise(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "D":
+                    case "4":
                         CreateNewAssignment(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "E":
+                    case "5":
                         CreateNewCourse(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "F":
+                    case "6":
                         CreateNewHelpRequestExercise(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
-                    case "G":
+                    case "7":
                         CreateNewHelpRequestAssignment(db);
+                        Console.Clear();
+                        Console.WriteLine("Created!");
+                        Console.WriteLine("----------------------------------------------------------------------------------------");
                         break;
                     default:
                         leave = true;
